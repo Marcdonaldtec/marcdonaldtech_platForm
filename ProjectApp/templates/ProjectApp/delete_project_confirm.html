@@ -1,0 +1,14 @@
+{% extends 'MainApp/base.html' %}
+
+{% block title %} Confirm Deletion - {{ project.title }} {% endblock %}
+{% block content %}
+  <div class="container">
+    <h1 class="display-4">Confirm Deletion - {{ project.title }}</h1>
+    <p>Are you sure you want to delete this project?</p>
+    <form method="post" action="{% url 'ProjectApp:delete_project' project.slug %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Yes, Delete</button>
+      <a href="{% url 'UserApp:user_profile' username=request.user.username %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

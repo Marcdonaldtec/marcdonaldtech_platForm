@@ -1,0 +1,53 @@
+{% extends 'MainApp/base.html' %}
+
+{% block title %} {{ user_profile.user.username }} - Profile {% endblock %}
+{% block content %}
+  <div class="container animate__animated animate__fadeIn">
+    <div class="mb-15">
+    <h1 class="display-4">{{ user_profile.user.username }}'s Profile</h1>
+
+    <img src="{{ user_profile.photo.url }}" alt="User Photo" class="profile-image" data-lightbox="user-profile">
+
+
+    <p class="animate__animated animate__fadeInUp"><strong>Signature:</strong> {{ user_profile.signature }}</p>
+    <p class="animate__animated animate__fadeInUp"><strong>Email:</strong> {{ user_profile.email }}</p>
+    <p class="animate__animated animate__fadeInUp"><strong>Phone:</strong> {{ user_profile.phone }}</p>
+</div>
+    {% if user_profile.project_set.all %}
+    <h2 class="animate__animated animate__fadeInUp animate__delay-1s">Projects</h2>
+    {% for project in user_profile.project_set.all %}
+      <div class="card mb-3 animate__animated animate__fadeInUp animate__delay-2s">
+        <div class="card-body">
+          <h3 class="card-title">{{ project.title }}</h3>
+          {% if project.photo %}
+            <a href="{{ project.photo.url }}" data-lightbox="project-{{ project.slug }}">
+              <img src="{{ project.photo.url }}" alt="{{ project.title }} Photo" class="img-fluid mb-3">
+            </a>
+          {% endif %}
+
+            {% if user.is_authenticated %}
+              {% if user == user_profile.user %}
+                <ul class="list-inline">
+                  <li class="list-inline-item">
+                    <a href="{% url 'ProjectApp:project_detail' project.slug %}" class="btn btn-primary">View Project</a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="{% url 'ProjectApp:delete_project' project.slug %}" class="btn btn-danger">Delete Project</a>
+                  </li>
+                </ul>
+              {% else %}
+                <a href="{% url 'ProjectApp:project_detail' project.slug %}" class="btn btn-primary">View Project</a>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="animate__animated animate__fadeInUp animate__delay-3s">No projects available.</p>
+    {% endif %}
+
+    {% if user.is_authenticated and user == user_profile.user %}
+      <a href="{% url 'ProjectApp:create_project' %}" class="btn btn-success animate__animated animate__fadeInUp animate__delay-4s">Add Project</a>
+    {% endif %}
+  </div>
+{% endblock %}

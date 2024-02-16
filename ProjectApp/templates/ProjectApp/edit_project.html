@@ -1,0 +1,39 @@
+{% extends 'MainApp/base.html' %}
+
+{% block title %} Edit Project - {{ project.title }} {% endblock %}
+{% block content %}
+  <div class="container">
+    <h1 class="display-4">Edit Project - {{ project.title }}</h1>
+    <form method="post" enctype="multipart/form-data" action="{% url 'ProjectApp:edit_project' project.slug %}">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="form-group">
+        {{ form.title.label_tag }}
+        {{ form.title }}
+        {{ form.title.errors }}
+      </div>
+      <div class="form-group">
+        {{ form.slug.label_tag }}
+        {{ form.slug }}
+        {{ form.slug.errors }}
+      </div>
+      <div class="form-group">
+        {{ form.description.label_tag }}
+        {{ form.description }}
+        {{ form.description.errors }}
+      </div>
+      <div class="form-group">
+        {{ form.photo.label_tag }}
+        {{ form.photo }}
+        {{ form.photo.errors }}
+      </div>
+      <div class="form-group">
+        {{ form.categories.label_tag }}
+        {{ form.categories }}
+        {{ form.categories.errors }}
+      </div>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+      <a href="{% url 'UserApp:user_profile' username=request.user.username %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

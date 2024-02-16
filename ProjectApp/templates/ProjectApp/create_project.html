@@ -1,0 +1,38 @@
+{% extends 'MainApp/base.html' %}
+
+{% block title %}Create Project{% endblock %}
+{% block content %}
+  <div class="container">
+    <h1 class="display-4">Create a New Project</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="form-group">
+        {{ form.title.label_tag }}
+        {{ form.title }}
+        {{ form.title.errors }}
+      </div>
+      <div class="form-group">
+        {{ form.slug.label_tag }}
+        {{ form.slug }}
+        {{ form.slug.errors }}
+      </div>
+      <div class="form-group">
+        {{ form.description.label_tag }}
+        {{ form.description }}
+        {{ form.description.errors }}
+      </div>
+      <div class="form-group">
+        {{ form.photo.label_tag }}
+        {{ form.photo }}
+        {{ form.photo.errors }}
+      </div>
+      <div class="form-group">
+        {{ form.categories.label_tag }}
+        {{ form.categories }}
+        {{ form.categories.errors }}
+      </div>
+      <button type="submit" class="btn btn-success">Create Project</button>
+    </form>
+  </div>
+{% endblock %}
