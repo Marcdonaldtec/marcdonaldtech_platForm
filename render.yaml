@@ -1,0 +1,8 @@
+services:
+  - name: web
+    env: python
+    start_cmd: gunicorn your_project_name.wsgi:application
+    healthcheck_path: /health
+    env_vars:
+    DJANGO_SETTINGS_MODULE: "marc_platform.settings"
+    build_command: pip install -r requirements.txt

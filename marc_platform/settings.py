@@ -23,9 +23,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9)%zg00o*(7+%kakp-u!c7kb0bgnn*3m-qw!g&u3q0e+*4eu$)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+if DEBUG:
+    ALLOWED_HOSTS = []
+else:
+    ALLOWED_HOSTS = ['marcdonaltech-platform.onrender.com'] 
+
+from decouple import config
+
+
+SECRET_KEY = config('s&t9r6+auns%+uy96gbs+%p@0ojij&9$1jzj4md1!r&gm!iv$_')
+DEBUG = config('DEBUG', default=False, cast=bool)
+DATABASE_URL = config('DATABASE_URL', default='sqlite:///db.sqlite3')
+
+
 
 
 # Application definition
