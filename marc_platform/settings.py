@@ -33,9 +33,7 @@ else:
 from decouple import config
 
 
-SECRET_KEY = config('s&t9r6+auns%+uy96gbs+%p@0ojij&9$1jzj4md1!r&gm!iv$_')
-DEBUG = config('DEBUG', default=False, cast=bool)
-DATABASE_URL = config('DATABASE_URL', default='sqlite:///db.sqlite3')
+
 
 
 
@@ -136,9 +134,17 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+SECRET_KEY = config('1k%&8zxn(=8)!%&%04jw(pu9m2o)sa12(4gsb5h)8j@re9mlbb')
+DEBUG = config('DEBUG', default=False, cast=bool)
+DATABASE_URL = config('DATABASE_URL', default='sqlite:///db.sqlite3')
+
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
