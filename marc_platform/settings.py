@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9)%zg00o*(7+%kakp-u!c7kb0bgnn*3m-qw!g&u3q0e+*4eu$)'
+SECRET_KEY = '18zxn804jwpu9m2osa124gsb5h8re9mlbb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -29,14 +29,6 @@ if DEBUG:
     ALLOWED_HOSTS = []
 else:
     ALLOWED_HOSTS = ['marcdonaltech-platform.onrender.com'] 
-
-from decouple import config
-
-
-
-
-
-
 
 # Application definition
 
@@ -139,9 +131,11 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-SECRET_KEY = config('1k%&8zxn(=8)!%&%04jw(pu9m2o)sa12(4gsb5h)8j@re9mlbb')
-DEBUG = config('DEBUG', default=False, cast=bool)
-DATABASE_URL = config('DATABASE_URL', default='sqlite:///db.sqlite3')
+from decouple import config
+
+# SECRET_KEY = config('bB[]S$DzO6"[IF/`Tg)Rt;1/-r=u|r94W4e}QDiu&%eLTg9/vw')
+# DEBUG = config('DEBUG', default=True, cast=bool)
+# DATABASE_URL = config('DATABASE_URL', default='sqlite:///db.sqlite3')
 
 
 
