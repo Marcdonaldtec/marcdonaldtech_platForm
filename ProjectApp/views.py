@@ -11,37 +11,26 @@ def create_project(request):
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             project = form.save(commit=False)
-<<<<<<< HEAD
             # Utilisez request.user pour obtenir l'utilisateur connecté
             user_profile = request.user.userprofile
             # Associez le projet à l'utilisateur connecté
             project.user_profile = user_profile
             project.save()
             form.save_m2m()  # Enregistrez les relations many-to-many (catégories) après avoir enregistré le projet
-=======
-            user_profile = request.user.userprofile
-            project.user_profile = user_profile
-            project.save()
-            form.save_m2m() 
->>>>>>> 275d7765e9dd1b476bacfce6d6bfc918eb07bad2
             return redirect('UserApp:user_profile', username=request.user.username)
     else:
         form = ProjectForm()
 
     return render(request, 'ProjectApp/create_project.html', {'form': form})
 
-<<<<<<< HEAD
-
 def edit_project(request, project_slug):
     project = get_object_or_404(Project, slug=project_slug)
 
     # Assurez-vous que l'utilisateur est le propriétaire du projet avant de permettre l'édition
-=======
 @login_required(login_url='AuthenticationApp:login')
 def edit_project(request, project_slug):
     project = get_object_or_404(Project, slug=project_slug)
 
->>>>>>> 275d7765e9dd1b476bacfce6d6bfc918eb07bad2
     if request.user == project.user_profile.user:
         if request.method == 'POST':
             form = ProjectForm(request.POST, request.FILES, instance=project)
@@ -52,7 +41,6 @@ def edit_project(request, project_slug):
             form = ProjectForm(instance=project)
 
         return render(request, 'ProjectApp/edit_project.html', {'form': form, 'project': project})
-<<<<<<< HEAD
 
     # Si l'utilisateur n'est pas le propriétaire, redirigez-le ou affichez un message d'erreur
     return redirect('UserApp:user_profile', username=request.user.username)
@@ -62,31 +50,23 @@ def delete_project(request, project_slug):
     project = get_object_or_404(Project, slug=project_slug)
 
     # Assurez-vous que l'utilisateur est le propriétaire du projet avant de permettre la suppression
-=======
     return redirect('UserApp:user_profile', username=request.user.username)
 
 @login_required(login_url='AuthenticationApp:login')
 def delete_project(request, project_slug):
     project = get_object_or_404(Project, slug=project_slug)
 
->>>>>>> 275d7765e9dd1b476bacfce6d6bfc918eb07bad2
     if request.user == project.user_profile.user:
         if request.method == 'POST':
             project.delete()
             return redirect('UserApp:user_profile', username=request.user.username)
 
         return render(request, 'ProjectApp/delete_project_confirm.html', {'project': project})
-
-<<<<<<< HEAD
     # Si l'utilisateur n'est pas le propriétaire, redirigez-le ou affichez un message d'erreur
     return redirect('UserApp:user_profile', username=request.user.username)
 
 
-=======
-    return redirect('UserApp:user_profile', username=request.user.username)
-
 @login_required(login_url='AuthenticationApp:login')
->>>>>>> 275d7765e9dd1b476bacfce6d6bfc918eb07bad2
 def project_detail(request, project_slug):
     project = get_object_or_404(Project, slug=project_slug)
     return render(request, 'ProjectApp/project_detail.html', {'project': project})
