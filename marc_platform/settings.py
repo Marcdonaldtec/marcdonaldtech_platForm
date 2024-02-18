@@ -23,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '18zxn804jwpu9m2osa124gsb5h8re9mlbb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-if DEBUG:
-    ALLOWED_HOSTS = []
-else:
-    ALLOWED_HOSTS = ['marcdonaltech-platform.onrender.com'] 
+# if DEBUG:
+#     ALLOWED_HOSTS = []
+# else:
+#     ALLOWED_HOSTS = ['marcdonaltech-platform.onrender.com'] 
 
 # Application definition
 
@@ -126,10 +126,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 
 from decouple import config
 
