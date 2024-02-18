@@ -1,0 +1,13 @@
+{% extends 'MainApp/base.html' %}
+
+{% block title %}Create Your Profile{% endblock %}
+{% block content %}
+  <div class="container">
+    <h1 class="display-4">Create Your Profile</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-success">Create Profile</button>
+    </form>
+  </div>
+{% endblock %}

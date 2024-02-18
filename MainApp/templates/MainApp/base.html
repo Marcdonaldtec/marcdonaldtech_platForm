@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        integrity="sha512-aeB/H8JLr8EOlXGnWM3u3uIoHBe32NlX2DEOh4ExvYzIxb5fxj8znLxr6fnXz8Ycd5q+ToBCybRkWtVumZUuow=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="{%  static 'css/style.css' %}">
+</head>
+<style>
+    .logo {
+        width: 20%;
+        height: auto;
+    }
+</style>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/"><img src="{% static 'images/myLogo1.png' %}" alt="marcdonaldtech"
+                    class="logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'CategoryApp:all_categories' %}">All Projects Categories</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <div class="d-flex align-items-start">
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="{% url 'UserApp:user_profile' username=request.user.username %}"><img
+                                    src="{{ user_profile.photo.url }}" alt="User Photo" class="profile-image-navBar"
+                                    data-lightbox="user-profile"> {{ user.username }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'AuthenticationApp:logout' %}">Logout</a>
+                        </li>
+                    </div>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'AuthenticationApp:login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'AuthenticationApp:register' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">© 2024 marcdonaldtech</span>
+            <div class="text-center">
+                <a href="{% url 'ProjectApp:create_project' %}" class="ml-auto">Add a project</a>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"
+        integrity="sha512-RgF9eRwYYSDP6JiJnQOpr8K36SDceK66WO5A2H2j/Vq+TtaIQcQOL+C2oqaADu82GR1y1Nzl9MvCEAmQpF7E8A=="
+        crossorigin="anonymous">
+        </script>
+    <script> lightbox.init();</script>
+</body>
+
+</html>
