@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '18zxn804jwpu9m2osa124gsb5h8re9mlbb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 if DEBUG:
     ALLOWED_HOSTS = []
@@ -126,14 +126,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / "static"
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 from decouple import config
-
-# Let's comment the secret key because it doesn't work
 
 # SECRET_KEY = config('bB[]S$DzO6"[IF/`Tg)Rt;1/-r=u|r94W4e}QDiu&%eLTg9/vw')
 # DEBUG = config('DEBUG', default=True, cast=bool)
